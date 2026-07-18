@@ -2,9 +2,9 @@
 
 export const siteConfig = {
   // 网站标题与博主信息
-  title: "Starhiroの小站",
+  title: "OiOiの小站",
   url: "https://boke.hiromu.top",
-  authorName: "Starhiro",
+  authorName: "OiOi",
   bio: "项目开源在 GitHub,点击下面的GitHub图标跳转,欢迎 star 和 fork！(◕‿◕)",
 
   // 头像设置
@@ -41,8 +41,7 @@ export const siteConfig = {
     github: "https://github.com/Xinghongia/Kirameku",
     gitee: "https://gitee.com/hongzyh",
     google: "mailto:guh982719@gmail.com",
-    email: "your.email@example.com",
-    qq: "123456789",
+    qq: "1978479191",
     wechat: "your_wechat_id",
   },
 

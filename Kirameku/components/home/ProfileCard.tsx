@@ -1,5 +1,7 @@
+// 连接 siteConfig.tsx 中的配置信息，用户作者信息配置
 import { siteConfig } from "@/siteConfig";
 
+// 接收HomeClient.tsx传递过来的参数 
 export default function ProfileCard({
   postCount = 0,
   chatterCount = 0,
@@ -77,7 +79,7 @@ export default function ProfileCard({
     </div>
   );
 }
-
+// 统计项组件
 function StatItem({
   count,
   label,
@@ -100,7 +102,7 @@ function StatItem({
     </div>
   );
 }
-
+// 社交按钮组件
 function SocialBtn({
   type,
   url,

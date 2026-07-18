@@ -2,7 +2,6 @@ export * from "./posts";
 export * from "./albums";
 export * from "./categories";
 export * from "./chatters";
-export * from "./projects";
 export * from "./friends";
 export * from "./messages";
 export * from "./comments";

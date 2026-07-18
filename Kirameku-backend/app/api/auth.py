@@ -37,6 +37,46 @@ def login(req: LoginRequest, session: Session = Depends(get_session)):
     }
 
 
+@router.post("/register")
+def register(req: LoginRequest, session: Session = Depends(get_session)):
+    # 检查用户名是否已存在
+    existing = session.exec(select(User).where(User.username == req.username)).first()
+    if existing:
+        raise HTTPException(status_code=400, detail="用户名已存在")
+
+    # 创建新用户
+    hashed = hash_password(req.password)
+    new_user = User(
+        username=req.username,
+        hashed_password=hashed,
+        nickname=req.username,
+        created_at=datetime.now(),
+        updated_at=datetime.now(),
+    )
+    session.add(new_user)
+    session.commit()
+    session.refresh(new_user)
+
+    # 生成令牌并返回
+    token = create_token({"sub": new_user.username, "admin": new_user.is_admin})
+    expires = datetime.utcnow() + timedelta(hours=ACCESS_TOKEN_EXPIRE_HOURS)
+
+    return {
+        "code": 0,
+        "message": "注册成功",
+        "data": {
+            "accessToken": token,
+            "refreshToken": "",
+            "expires": expires.isoformat(),
+            "avatar": new_user.avatar or "",
+            "username": new_user.username,
+            "nickname": new_user.nickname or new_user.username,
+            "roles": ["admin"] if new_user.is_admin else [],
+            "permissions": ["*:*:*"] if new_user.is_admin else [],
+        },
+    }
+
+
 @router.get("/me")
 def me(user: dict = Depends(get_current_user), session: Session = Depends(get_session)):
     username = user.get("sub")

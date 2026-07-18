@@ -1,6 +1,8 @@
 "use client";
-
+// 组件书写
+// useState 用于管理输入框的值和组件状态
 import { useState } from "react";
+// useRouter 用于编程式导航，实现页面跳转
 import { useRouter } from "next/navigation";
 
 export default function SearchBar() {
@@ -16,6 +18,7 @@ export default function SearchBar() {
   }
 
   return (
+    // 编写搜索栏组件的 HTML 结构
     <div className="w-full max-w-2xl mx-auto mb-10">
       <form
         className="relative group"

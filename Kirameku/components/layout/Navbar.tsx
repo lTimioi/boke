@@ -12,7 +12,6 @@ import {
   BookOpen,
   MessageSquare,
   Newspaper,
-  FolderGit2,
   Users,
   Camera,
   Clock,
@@ -34,12 +33,12 @@ const navLinks = [
   { href: "/messages", label: "留言", icon: Newspaper },
   { href: "/novel", label: "小说", icon: Library },
   { href: "/bookmark", label: "收藏夹", icon: Bookmark },
-  { href: "/projects", label: "项目", icon: FolderGit2 },
   { href: "/friends", label: "友链", icon: Users },
   { href: "/photowall", label: "照片墙", icon: Camera },
   { href: "/timeline", label: "归档", icon: Clock },
   { href: "/music", label: "音乐", icon: Music },
   { href: "/about", label: "关于", icon: User },
+  { href: "/Login", label: "登录", icon: Settings },
 ];
 
 export default function Navbar() {
