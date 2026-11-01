@@ -14,16 +14,15 @@ import {
   Clock,
   Music,
   User,
-  Library,
   Bookmark,
 } from "lucide-react";
 
 const navItems = [
   { href: "/", label: "首页", icon: Home },
   { href: "/posts", label: "文章", icon: BookOpen },
+  { href: "/aigc", label: "幻绘", icon: Camera },
   { href: "/moments", label: "说说", icon: MessageSquare },
   { href: "/messages", label: "留言", icon: Newspaper },
-  { href: "/novel", label: "小说", icon: Library },
   { href: "/bookmark", label: "收藏夹", icon: Bookmark },
   { href: "/friends", label: "友链", icon: Users },
   { href: "/photowall", label: "照片墙", icon: Camera },

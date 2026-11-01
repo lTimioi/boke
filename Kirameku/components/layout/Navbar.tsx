@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "@/components/providers/ThemeProvider";
 
 import SettingsPanel from "@/components/ui/SettingsPanel";
+// 导航栏图标
 import {
   Home,
   BookOpen,
@@ -22,23 +23,29 @@ import {
   Menu,
   X,
   Settings,
-  Library,
   Bookmark,
+  Shield,
+  Sparkles,
 } from "lucide-react";
 
+// 导航栏链接
 const navLinks = [
   { href: "/", label: "首页", icon: Home },
   { href: "/posts", label: "文章", icon: BookOpen },
+  { href: "/aigc", label: "幻绘", icon: Camera },
   { href: "/moments", label: "说说", icon: MessageSquare },
   { href: "/messages", label: "留言", icon: Newspaper },
-  { href: "/novel", label: "小说", icon: Library },
   { href: "/bookmark", label: "收藏夹", icon: Bookmark },
   { href: "/friends", label: "友链", icon: Users },
   { href: "/photowall", label: "照片墙", icon: Camera },
   { href: "/timeline", label: "归档", icon: Clock },
   { href: "/music", label: "音乐", icon: Music },
   { href: "/about", label: "关于", icon: User },
-  { href: "/Login", label: "登录", icon: Settings },
+  { href: "/welcom", label: "欢迎", icon: Sparkles },
+
+  // 登录和管理链接在后期开发
+  // { href: "/Login", label: "登录", icon: Settings },
+  // { href: "/admin/aigc", label: "管理", icon: Shield },
 ];
 
 export default function Navbar() {
@@ -150,7 +157,7 @@ export default function Navbar() {
         msg.innerHTML = `
           <div style="font-size:48px;margin-bottom:12px">🎉</div>
           <div style="font-size:24px;font-weight:bold;margin-bottom:8px">恭喜你发现了彩蛋！</div>
-          <div style="font-size:14px;opacity:0.8">连续点击 Logo 7 次触发 · Starhiro の小站</div>
+          <div style="font-size:14px;opacity:0.8">连续点击 Logo 7 次触发 ·叶 の小站</div>
         `;
         msg.style.cssText = `
           position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
@@ -201,7 +208,7 @@ export default function Navbar() {
               style={easterEgg ? { animation: "spin 0.5s ease-in-out 6, rainbow 3s linear" } : undefined}
             >
               <span className={`text-xl font-bold tracking-tight ${easterEgg ? "text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500" : "text-slate-800 dark:text-white"}`} style={{ fontFamily: "'Noto Serif SC', serif" }}>
-                Starhiro
+                叶
               </span>
               <span className={`text-xl font-bold ${easterEgg ? "text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500" : "text-sky-500 dark:text-sky-400"}`} style={{ fontFamily: "serif" }}>
                 の

@@ -1,3 +1,4 @@
+// 定义 Meting 类的类型
 declare module "@meting/core" {
   export default class Meting {
     constructor(server: string);

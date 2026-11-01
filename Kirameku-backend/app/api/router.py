@@ -1,4 +1,4 @@
-"""汇总所有 API 子路由，main.py 只需 include_router(api_router) 即可"""
+"""汇总所有 app/api/ 下的 API 子路由，main.py 只需 include_router(api_router) 即可"""
 
 from fastapi import APIRouter
 

@@ -2,9 +2,9 @@
 
 export const siteConfig = {
   // 网站标题与博主信息
-  title: "OiOiの小站",
+  title: "叶の小站",
   url: "https://boke.hiromu.top",
-  authorName: "OiOi",
+  authorName: "叶",
   bio: "项目开源在 GitHub,点击下面的GitHub图标跳转,欢迎 star 和 fork！(◕‿◕)",
 
   // 头像设置
@@ -27,7 +27,7 @@ export const siteConfig = {
 
   // 照片墙预览图
   photoWallImage: "/images/photo-wall.jpg",
-
+                                         
   // 云音乐配置（网易云音乐）
   // 填歌单 ID 则自动拉取整个歌单，填歌曲 ID 列表则只播放指定歌曲
   cloudMusicPlaylistId: "17943739323",  // 歌单 ID（优先）

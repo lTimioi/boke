@@ -1,14 +1,18 @@
 "use client";
-
+// 设置面板
 import { useState } from "react";
+// Next.js Image 组件，用于优化图片加载和渲染
 import Image from "next/image";
+// 背景设置上下文 Hook，用于获取和设置背景图片及模糊度
 import { useBackground } from "@/components/providers/BackgroundProvider";
+// 鼠标效果上下文 Hook，用于获取和切换各种鼠标特效状态
 import { useEffects } from "@/components/providers/EffectProvider";
+// 站点配置文件，包含背景图片列表等全局配置
 import { siteConfig } from "@/siteConfig";
 
 export default function SettingsPanel({ onClose }: { onClose: () => void }) {
   const { bgImage, bgBlur, setBgImage, setBgBlur } = useBackground();
-  const { clickEffect, mouseTrail, seasonalEffect, sparkleEffect, toggleClickEffect, toggleMouseTrail, toggleSeasonalEffect, toggleSparkleEffect } = useEffects();
+  const { clickEffect, mouseTrail, seasonalEffect, yinghuaEffect,sparkleEffect, toggleClickEffect, toggleMouseTrail, toggleSeasonalEffect, toggleyinghuaEffect,toggleSparkleEffect } = useEffects();
   const images = siteConfig.bgImages;
   const currentIndex = images.indexOf(bgImage);
   const [showGrid, setShowGrid] = useState(false);
@@ -186,6 +190,18 @@ export default function SettingsPanel({ onClose }: { onClose: () => void }) {
               <div className={`w-4 h-4 rounded-full bg-white shadow-sm transition-transform mt-0.5 ${seasonalEffect ? "translate-x-4.5" : "translate-x-0.5"}`} />
             </div>
           </button>
+          {/* 樱花飘落 */}
+          {/* <button
+            type="button"
+            onClick={toggleyinghuaEffect}
+            className="w-full flex items-center justify-between px-3 py-2 rounded-lg bg-white/40 dark:bg-slate-800/40 hover:bg-white/60 dark:hover:bg-slate-800/60 transition-colors"
+          >
+            <span className="text-xs text-slate-700 dark:text-slate-300">樱花飘落</span>
+            <div className={`w-9 h-5 rounded-full transition-colors ${yinghuaEffect ? "bg-sky-500" : "bg-slate-300 dark:bg-slate-600"}`}>
+              <div className={`w-4 h-4 rounded-full bg-white shadow-sm transition-transform mt-0.5 ${yinghuaEffect ? "translate-x-4.5" : "translate-x-0.5"}`} />
+            </div>
+          </button> */}
+
           <button
             type="button"
             onClick={toggleSparkleEffect}

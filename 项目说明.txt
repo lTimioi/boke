@@ -1,0 +1,65 @@
+这是对项目完整目录结构的详细解析。整个项目采用 前后端分离 架构，根目录下有三个主体：
+
+## 一、前端 Kirameku/（Next.js 16 + React 19）
+负责对访客展示的博客网站本体。
+
+### 1. app/ — 页面路由（Next.js App Router 核心）
+每个文件夹就是一个 URL 路由页面。
+
+目录/文件 用途 page.tsx 首页 （唯一入口），个人博客首页 layout.tsx 根布局 ，包裹所有页面（导航栏、全局样式、主题） HomeClient.tsx 首页的客户端交互组件 globals.css 全局样式（Tailwind 指令、自定义 CSS） icon.png 浏览器标签页图标 Login/page.tsx 登录页 about/ 关于页（ about.md 是 Markdown 内容， page.tsx 渲染它） aigc/page.tsx 幻绘页 （AIGC 照片展示：意境·幻象 + 艺术长廊） admin/aigc/page.tsx 前端的管理界面（AIGC 照片管理） photo/ photowall/ 相册、照片墙页面 posts/ posts/[slug]/ 文章列表页 + 文章详情页（slug 为动态路由） moments/ messages/ 说说、留言板页面 friends/ 友链页面 bookmark/ 收藏夹页面 timeline/ 时间线页面 music/ 音乐播放页 feed/route.ts RSS 订阅源接口 auth/callback/page.tsx GitHub 登录回调页 api/ 前端 API 调用封装层 （不是后端接口） garden/ 趣味小工具合集（每个子目录一个工具页：color 调色、fireworks 烟花、math 数学、qrcode 二维码、python、visitor 等 20 个）
+
+app/api/ 详解 — 这是浏览器里调后端 REST API 的统一封装：
+
+- client.ts — Axios/fetch 封装，自动加 token、处理 401
+- posts.ts albums.ts categories.ts tags.ts comments.ts messages.ts chatters.ts bookmarks.ts friends.ts — 各业务模块 API 函数
+- aigc-photos.ts site-config.ts — AIGC 照片、站点配置
+- types.ts index.ts — 类型定义与导出入口
+- music/route.ts uapis/route.ts — Next 自带的后端代理路由（解决跨域）
+### 2. components/ — 组件库
+子目录 用途 home/ 首页专属组件（个人卡片、最新文章轮播、照片墙预览等） layout/ 布局组件（导航栏 Navbar、侧边栏 Sidebar、背景渲染、访客追踪） music/ 音乐播放器（悬浮播放器、歌词栏、云播放） photos/ 相册卡片、照片卡片、Lightbox 大图弹窗 posts/ 文章卡片、评论区 providers/ 全局状态提供者（主题 Theme、音乐 Music、特效、Toast 提示） ui/ 通用 UI 组件 （回到顶部 middle/底部 topORdown 、玻璃卡片、搜索栏、自定义鼠标等） widgets/ 侧边小工具面板（工具箱 Toolbox + 20 个工具 app + Live2D 看板娘） icons/ 自绘图标组件
+
+### 3. data/ — 静态数据
+albums.ts chatters.ts moments.ts photos.ts posts.ts — 页面用到的示例/本地数据（部分页面在当前从后端取数前先用它兜底）。
+
+### 4. public/ — 静态资源（根路径 / 直接访问）
+目录/文件 用途 images/aigc/*.jpg 意境·幻象展示图 images/*.webp 艺术长廊及站点图片 text/aigc/*.md 每张 AIGC 图对应的文字介绍 live2d/ Live2D 看板娘模型（多个角色 model、js、css） arrow-*.svg 回到顶部/中间/底部的箭头图标 next.svg vercel.svg file.svg globe.svg window.svg 模板/通用图标
+
+### 5. 根配置文件
+next.config.ts （Next 配置）、 postcss.config.mjs + tailwindcss （样式）、 eslint.config.mjs （代码检查）、 package.json / package-lock.json / pnpm-lock.yaml （依赖）、 .env.example （环境变量模板）。
+
+## 二、后端 Kirameku-backend/（FastAPI + Vue 管理后台）
+### 1. app/ — FastAPI 核心（Python 分层架构）
+采用经典的 API → 模型 → Schema → Service 四层结构：
+
+文件/目录 用途 main.py 应用入口 ，创建 FastAPI 实例、挂 CORS、静态文件、路由 config.py 读取 .env 配置（数据库、密钥、OSS 等） database.py 数据库连接（SQLModel + PostgreSQL） deps.py 通用依赖（会话、当前用户校验） api/ 路由层 （HTTP 接口定义） models/ ORM 模型层 （数据库表映射：user, post, album, photo...） schemas/ 数据校验层 （请求/响应结构） services/ 业务逻辑层 （CRUD 操作） utils/auth.py 密码哈希（bcrypt）、JWT 生成/验证
+
+api/ 路由详情：
+
+文件 对应模块 & 接口前缀 auth.py 登录认证 /api/auth github_auth.py GitHub 登录 posts.py 文章 /api/posts categories.py tags.py 分类 / 标签 comments.py messages.py 评论 / 留言 chatters.py 说说 albums.py 相册与照片 /api/albums projects.py friend_links.py 项目 / 友链 bookmarks.py 收藏夹 site_config.py 站点配置 upload.py 文件上传 /api/upload （图片，OSS/本地） visitors.py 访客统计 dashboard.py 仪表盘统计 router.py 汇总所有子路由 ，main.py 只需挂载这一个
+
+### 2. admin/ — 管理后台前端（Vue 3 + Element Plus）
+一个独立的 Vue 项目（基于 Pure Admin 模板），通过 /admin 挂载到主站。
+
+目录 用途 src/api/ 各业务模块的 API 调用 src/views/ 管理页面 （post 文章管理、album 相册、project、comment、tag、visitor、welcome 仪表盘、system 系统管理等） src/router/ 前端路由（hash 模式） src/store/ 状态管理（用户、主题） src/layout/ 后台布局框架 src/utils/ 工具函数（ http 请求封装带 token 拦截） src/components/ → 见 layout/views 内 通用组件 build/ 打包产物 （后端挂载此目录） public/ locales/ mock/ 静态资源、多语言、mock 数据 vite.config.ts Vite 构建配置
+
+### 3. 根配置文件（后端）
+- init_db.sql — 建表 + 初始化管理员 的 SQL 脚本
+- DATABASE.md — 数据库说明文档
+- requirements.txt — Python 依赖
+- start.py — 一键启动（自动开浏览器）
+- .env.example — 环境变量模板
+- fancy-meandering-rain.md — 历史遗留文档
+## 三、根目录其他文件
+文件 用途 .ua/ /understand 技能生成的 知识图谱 缓存（batch*.json 等是分析中间产物，与项目运行无关） DEPLOY_NOTES.md 部署说明 .hintrc .gitignore 编辑器提示 / Git 忽略规则
+
+## 数据流向（简要版）
+```
+浏览器(前台 Kirameku)
+      │  http://localhost:3000
+      ▼
+前端 app/api/*.ts  ──fetch──▶  FastAPI(app/api/*.py)
+                                     │
+                            service → models → PostgreSQL
+                                     │
+                          upload.py → uploads/ 或 OSS
+```

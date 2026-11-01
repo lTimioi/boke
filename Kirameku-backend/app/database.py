@@ -1,3 +1,4 @@
+# 数据库配置
 from sqlmodel import SQLModel, create_engine, Session
 from app.config import DATABASE_URL
 

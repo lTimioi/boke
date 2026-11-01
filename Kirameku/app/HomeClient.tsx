@@ -1,5 +1,6 @@
 "use client"; // 声明这是一个客户端组件，需要在浏览器端运行
-// 首页客户端组件
+
+// 首页页面 和 首页客户端组件
 
 import dynamic from "next/dynamic"; // 从 Next.js 导入动态导入功能，用于按需加载组件
 import SearchBar from "@/components/ui/SearchBar"; // 导入搜索栏组件
@@ -7,6 +8,7 @@ import SearchBar from "@/components/ui/SearchBar"; // 导入搜索栏组件
 import ProfileCard from "@/components/home/ProfileCard"; // 导入个人资料卡片组件
 import FadeIn from "@/components/ui/FadeIn"; // 导入淡入动画组件
 import ComponentLabel from "@/components/ui/ComponentLabel"; // 导入组件标签包装器，用于开发调试时显示组件信息
+import TopORDown from "@/components/ui/topORdown"; // 导入滚动导航组件（顶部/中间/底部）
 
 // 使用 dynamic 动态导入 CloudPlayer 组件，禁用服务端渲染(ssr: false)，因为音乐播放器需要浏览器 API
 const CloudPlayer = dynamic(() => import("@/components/music/CloudPlayer"), { ssr: false });
@@ -16,6 +18,7 @@ const LyricBar = dynamic(() => import("@/components/music/LyricBar"), { ssr: fal
 const LatestPostsCarousel = dynamic(() => import("@/components/home/LatestPostsCarousel"), { ssr: false });
 // 动态导入最新说说轮播组件
 const LatestChatterCarousel = dynamic(() => import("@/components/home/LatestChatterCarousel"), { ssr: false });
+
 // 动态导入照片墙预览组件
 const PhotoWallPreview = dynamic(() => import("@/components/home/PhotoWallPreview"), { ssr: false });
 // 动态导入舔狗日记组件
@@ -34,9 +37,13 @@ export default function HomeClient({
   photoCount: number; // 照片数量，number 类型
 }) {
   return (
-    // 书写主体框架，将组件加入进去  
-    // 外层容器：全宽、最大宽度 6xl、水平居中、垂直内边距、水平内边距、相对定位、z-index 10
-    <div className="w-full max-w-6xl mx-auto py-6 md:py-12 px-4 sm:px-10 relative z-10">
+    <>
+      {/* 左侧悬浮滚动导航组件：固定在页面左侧，不随页面滚动 */}
+      <TopORDown />
+      {/* 主内容区域 */}
+      {/* 书写主体框架，将组件加入进去
+      // 外层容器：全宽、最大宽度 6xl、水平居中、垂直内边距、水平内边距、相对定位、z-index 10 */}
+      <div className="w-full max-w-6xl mx-auto py-6 md:py-12 px-4 sm:px-10 relative z-10">
       {/* 搜索栏区域 在Kirameku\components\ui\SearchBar.tsx 书写好 这里进行调用*/}
       {/* 这里可以看成框架 ，用于包裹组件 */}
       <FadeIn> {/* 使用 FadeIn 组件包裹，实现淡入动画效果 */}
@@ -52,7 +59,7 @@ export default function HomeClient({
           </ComponentLabel>
         </div>
       </FadeIn>
-
+      
       {/* 主要内容区域，使用 flex 布局，垂直排列，设置间距 */}
       <main className="flex flex-col gap-4 md:gap-6 w-full">
         {/* 第一行：个人信息卡片 + 音乐播放器 */}
@@ -88,7 +95,7 @@ export default function HomeClient({
             </div>
           </div>
         </FadeIn>
-
+        
         {/* 歌词栏区域 */}
         <FadeIn delay={0.15}> {/* 延迟 0.15 秒执行淡入动画 */}
           <div className="w-full">
@@ -102,6 +109,7 @@ export default function HomeClient({
             </ComponentLabel>
           </div>
         </FadeIn>
+
 
         {/* 第二行：照片墙 + 文章 + 说说 + 舔狗日记 */}
         <FadeIn delay={0.2}> {/* 延迟 0.2 秒执行淡入动画 */}
@@ -168,5 +176,6 @@ export default function HomeClient({
         </FadeIn>
       </main>
     </div>
+    </>
   );
 }

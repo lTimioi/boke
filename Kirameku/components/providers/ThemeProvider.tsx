@@ -1,5 +1,5 @@
 "use client";
-
+// 主题上下文提供器：用于管理应用的主题状态和切换
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 
 type Theme = "light" | "dark";

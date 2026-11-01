@@ -2,7 +2,7 @@
 cover: "/images/2.webp"
 ---
 
-## 你好，我是 Starhiro
+## 你好，我是  Leaf
 
 一位在读软件工程的大二学生，喜欢折腾技术，偶尔写写博客记录生活。
 
@@ -12,8 +12,8 @@ cover: "/images/2.webp"
 
 ## 技术栈
 
-- **主力：** Spring Boot, Vue, React, Next.js, Python
-- **略懂：** LangChain, Flutter, Kotlin
+- **主力：** Flaskapi,Django, Vue, React, Next.js, Python
+- **略懂：** LangChain, 
 - **其他：** Git, Docker, Linux, TypeScript, Tailwind CSS
 
 ## 兴趣爱好
@@ -24,7 +24,7 @@ cover: "/images/2.webp"
 
 ## 联系我
 
-- **GitHub：** [github.com/Xinghongia](https://github.com/Xinghongia)
-- **Email：** [3376219386@qq.com](mailto:3376219386@qq.com)
+- **GitHub：** [https://github.com/lTimioi](https://github.com/Xinghongia)
+- **Email：** [1978479191@qq.com](mailto:3376219386@qq.com)
 
 > Stay hungry, stay foolish. —— 求知若饥，虚心若愚。

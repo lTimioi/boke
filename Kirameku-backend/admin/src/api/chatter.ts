@@ -1,14 +1,24 @@
+// chatter.ts - 说说 API 接口
 import { http } from "@/utils/http";
-
+/** 说说（社交动态）数据项类型定义 */
 export type ChatterItem = {
+  /** 说说唯一标识 ID */
   id: number;
+  /** 说说的文本内容 */
   content: string;
+  /** 说说附带的图片 URL 列表 */
   images: string[];
+  /** 发表说说时的心情（如开心、难过等） */
   mood: string;
+  /** 点赞数量 */
   likes: number;
+  /** 评论总数 */
   comments_count: number;
+  /** 发布状态（如 published 已发布 / draft 草稿等） */
   status: string;
+  /** 创建时间（ISO 时间字符串） */
   created_at: string;
+  /** 最后更新时间（ISO 时间字符串） */
   updated_at: string;
 };
 

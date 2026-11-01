@@ -1,8 +1,11 @@
-import os
+#   配置文件
+
 from pathlib import Path
 from dotenv import load_dotenv
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+# 加载环境变量
 load_dotenv(BASE_DIR / ".env", override=True)
 
 DATABASE_URL = os.environ["DATABASE_URL"]
@@ -23,3 +26,16 @@ OSS_BUCKET_NAME = os.environ["OSS_BUCKET_NAME"]
 OSS_ENDPOINT = os.environ["OSS_ENDPOINT"]
 OSS_CUSTOM_DOMAIN = os.environ["OSS_CUSTOM_DOMAIN"]
 OSS_PREFIX = os.environ["OSS_PREFIX"]
+
+
+def oss_is_configured() -> bool:
+    """判断 OSS 是否配置了真实凭据（占位符视为未配置）"""
+    return all(
+        v and not str(v).startswith("your-")
+        for v in (
+            OSS_ACCESS_KEY_ID,
+            OSS_ACCESS_KEY_SECRET,
+            OSS_BUCKET_NAME,
+            OSS_CUSTOM_DOMAIN,
+        )
+    )

@@ -1,3 +1,4 @@
+# 认证工具
 from datetime import datetime, timedelta
 import bcrypt
 from fastapi import Depends, HTTPException
@@ -28,6 +29,6 @@ def decode_token(token: str) -> dict:
     except JWTError:
         raise HTTPException(status_code=401, detail="无效的令牌")
 
-
+# 获取当前用户信息
 def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)) -> dict:
     return decode_token(credentials.credentials)

@@ -9,6 +9,7 @@ import rehypeStringify from "rehype-stringify";
 import "highlight.js/styles/atom-one-dark.css";
 import { siteConfig } from "@/siteConfig";
 import FadeIn from "@/components/ui/FadeIn";
+import TopORDown from "@/components/ui/topORdown"; 
 
 export default async function AboutPage() {
   const fullPath = path.join(process.cwd(), "app", "about", "about.md");
@@ -34,6 +35,8 @@ export default async function AboutPage() {
   }
 
   return (
+    <>
+      <TopORDown />
     <FadeIn className="w-full max-w-4xl mx-auto py-6 md:py-12 px-4 sm:px-10 relative z-10">
       <div className="bg-white/40 dark:bg-slate-800/50 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/40 dark:border-white/10 overflow-hidden transition-colors duration-700">
 
@@ -161,5 +164,6 @@ export default async function AboutPage() {
         </div>
       </div>
     </FadeIn>
+    </>
   );
 }

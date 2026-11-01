@@ -1,3 +1,4 @@
+// 欢迎屏
 "use client";
 
 import { useState, useEffect } from "react";
@@ -6,6 +7,7 @@ import { siteConfig } from "@/siteConfig";
 
 const SESSION_KEY = "welcome-shown";
 
+// 获取时间问候
 function getTimeGreeting() {
   const now = new Date();
   const h = now.getHours();
@@ -17,6 +19,7 @@ function getTimeGreeting() {
   return `${now.getFullYear()}年${m}月${d}日${period}${hour}点${min > 0 ? min + "分" : ""}，很高兴与你相遇`;
 }
 
+// 欢迎屏组件
 export default function WelcomeScreen() {
   const [show, setShow] = useState(false);
 
@@ -36,29 +39,40 @@ export default function WelcomeScreen() {
   return (
     <AnimatePresence>
       {show && (
+        // 欢迎屏容器
         <motion.div
           className="fixed inset-0 z-[99999] flex items-center justify-center"
+          // 初始状态
           initial={{ opacity: 1 }}
+          // 动画状态
           animate={{ opacity: 1, pointerEvents: "auto" }}
+          // 退出状态
           exit={{ opacity: 0, pointerEvents: "none" }}
+          // 退出动画
           transition={{ duration: 0.8, ease: "easeInOut" }}
         >
           {/* 背景 */}
           <motion.div
             className="absolute inset-0 bg-slate-950"
+            // 退出状态
             exit={{ scale: 1.1 }}
+            // 退出动画
             transition={{ duration: 0.8, ease: "easeInOut" }}
           />
           <motion.div
             className="absolute inset-0 opacity-20"
+            // 初始状态
             style={{
               backgroundImage: `url(${siteConfig.bgImages[0]})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               filter: "blur(20px)",
             }}
+            // 动画状态
             initial={{ scale: 1.2, opacity: 0 }}
+            // 动画状态
             animate={{ scale: 1, opacity: 0.2 }}
+            // 退出状态
             transition={{ duration: 1.2 }}
           />
 
@@ -66,10 +80,15 @@ export default function WelcomeScreen() {
           <div className="relative z-10 text-center px-6">
             {/* 欢迎来到 */}
             <motion.p
+            // 初始状态
               className="text-lg md:text-xl text-slate-400 mb-4 tracking-[0.3em]"
+              // 初始状态
               initial={{ opacity: 0, y: 10 }}
+              // 动画状态
               animate={{ opacity: 1, y: 0 }}
+              // 退出状态
               exit={{ opacity: 0, y: -20 }}
+              // 退出动画
               transition={{ delay: 0.3, duration: 0.6 }}
             >
               欢迎来到
@@ -107,6 +126,7 @@ export default function WelcomeScreen() {
             <motion.p
               className="text-sm md:text-base text-slate-500 tracking-wider"
               initial={{ opacity: 0, y: 10 }}
+              
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
               transition={{ delay: 1.5, duration: 0.6 }}
